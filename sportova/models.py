@@ -89,22 +89,6 @@ class Product(models.Model):
         )
 
 
-class Shipment(models.Model):
-    name = models.CharField(max_length=100)
-    icon = models.ImageField(upload_to='shipment/icons/', blank=True, null=True)
-    description = models.TextField()
-    delivery_time = models.CharField(max_length=100)
-    cost = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['-created_at']
-
-    def __str__(self):
-        return self.name
-
-
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='products/gallery/')
@@ -123,6 +107,22 @@ class ProductImage(models.Model):
             # Ensure only one primary image per product
             ProductImage.objects.filter(product=self.product, is_primary=True).update(is_primary=False)
         super().save(*args, **kwargs)
+
+
+class Shipment(models.Model):
+    name = models.CharField(max_length=100)
+    icon = models.ImageField(upload_to='shipment/icons/', blank=True, null=True)
+    description = models.TextField()
+    delivery_time = models.CharField(max_length=100)
+    cost = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.name
 
 
 class BannerPicture(models.Model):
