@@ -63,6 +63,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "sportova.context_processors.site_contacts",
+                "sportova.context_processors.background_images",
             ],
         },
     },
