@@ -9,29 +9,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #3b82f6; /* blue-500 */
-            --secondary-color: #06b6d4; /* cyan-500 */
-            --accent-color: #1a1a2e;
-            --success-color: #10b981; /* emerald-500 */
-            --warning-color: #f59e0b; /* amber-500 */
-            --dark-color: #0f172a; /* slate-900 */
-            --text-dark: #0f172a; /* slate-900 */
-            --text-light: #475569; /* slate-600 */
-            --bg-light: #ffffff;
-            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-            --gradient-secondary: linear-gradient(135deg, #818cf8 0%, #06b6d4 100%);
-            --gradient-dark: linear-gradient(135deg, #0b1220 0%, #111827 100%);
-            --gradient-hero: linear-gradient(135deg, rgba(15, 23, 42, 0.55) 0%, rgba(2, 132, 199, 0.35) 100%);
-            --gradient-accent: linear-gradient(45deg, #3b82f6, #06b6d4, #10b981);
-            --shadow: 0 15px 35px rgba(59, 130, 246, 0.18);
-            --shadow-hover: 0 25px 50px rgba(59, 130, 246, 0.28);
-            --shadow-card: 0 8px 25px rgba(2, 6, 23, 0.08);
-            --shadow-neon: 0 0 20px rgba(59, 130, 246, 0.35);
+            /* Sportova Bold & Premium Color Palette (Crimson Red Accent) */
+            --primary-color: #0E1C36; /* Deep Navy - strength, authority, trust */
+            --secondary-color: #E63946; /* Crimson Red - energetic premium accent */
+            --background-color: #F4F4F4; /* Light Gray - modern balance */
+            --text-primary: #1A1A1A; /* Dark Charcoal - strong readability */
+            --text-secondary: #FFFFFF; /* White - clean contrast, overlay use */
+            --text-light: #666666; /* Medium gray for secondary text */
+            --accent-color: #E63946; /* Crimson accent */
+            --success-color: #16a34a; /* Balanced green */
+            --warning-color: #FF6B6B; /* Coral warning to avoid yellow */
+            --dark-color: #0E1C36;
+            --bg-light: #F4F4F4;
+            
+            /* Sportova Gradients */
+            --gradient-primary: linear-gradient(135deg, #0E1C36 0%, #1a2d4a 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b73 0%, #E63946 100%);
+            --gradient-dark: linear-gradient(135deg, #0E1C36 0%, #1a2d4a 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(14, 28, 54, 0.75) 0%, rgba(14, 28, 54, 0.45) 100%);
+            --gradient-accent: linear-gradient(45deg, #0E1C36, #E63946, #0E1C36);
+            /* Keep the same variable name but switch to crimson so existing usage works */
+            --gradient-gold: linear-gradient(135deg, #ff6b73 0%, #E63946 50%, #ff6b73 100%);
+            
+            /* Sportova Shadows */
+            --shadow: 0 15px 35px rgba(14, 28, 54, 0.15);
+            --shadow-hover: 0 25px 50px rgba(14, 28, 54, 0.25);
+            --shadow-card: 0 8px 25px rgba(14, 28, 54, 0.08);
+            /* Crimson glow instead of gold */
+            --shadow-neon: 0 0 20px rgba(230, 57, 70, 0.35);
+            --shadow-gold: 0 0 25px rgba(230, 57, 70, 0.35);
         }
 
         * {
@@ -41,77 +52,207 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.65;
-            color: var(--text-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            background-color: var(--bg-light);
+            background-color: var(--background-color);
+            font-weight: 400;
+            letter-spacing: -0.01em;
         }
 
-        h1, h2, h3, h4, h5, h6,
+        /* Modern Typography Hierarchy */
+        
+        /* Primary Headings: Space Grotesk for impact and modernity */
+        h1, h2, h3,
         .navbar-brand,
         .section-title,
         .hero-title {
-            font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            letter-spacing: 0.2px;
+            font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        /* Large Display Text */
+        h1, .hero-title {
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+        
+        /* Section Titles */
+        h2, .section-title {
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+        
+        /* Subsection Headings */
+        h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
         }
 
-        /* Navigation */
+        /* Secondary Headings: Outfit for versatility */
+        h4, h5, h6,
+        .subheading,
+        .section-subtitle,
+        .card-title {
+            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+        
+        h4 { font-weight: 600; }
+        h5 { font-weight: 500; }
+        h6 { font-weight: 500; }
+
+        /* Body Text: Inter for excellent readability */
+        p, .card-text, .feature-text {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.005em;
+            line-height: 1.6;
+        }
+        
+        /* Small Text */
+        small, .small {
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0;
+        }
+        
+        /* Accent text and highlights */
+        .accent-text,
+        .slogan,
+        .highlight-accent,
+        .price {
+            font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Navigation Links */
+        .nav-link {
+            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+        
+        /* Code and Monospace */
+        code, pre, .monospace {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+            font-weight: 400;
+        }
+
+        /* Navigation - Sportova Premium */
         .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(14, 28, 54, 0.1);
             transition: all 0.3s ease;
-            padding: 1rem 0;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
         }
 
         .navbar-brand {
             font-size: 2rem;
             font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-color) !important;
+            text-shadow: 0 2px 4px rgba(14, 28, 54, 0.1);
+            transition: all 0.3s ease;
+            letter-spacing: -0.03em;
+        }
+
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+            text-shadow: 0 0 15px rgba(230, 57, 70, 0.35);
         }
 
         .navbar-nav .nav-link {
-            font-weight: 500;
-            color: var(--text-dark) !important;
-            margin: 0 1rem;
+            font-weight: 600;
+            color: var(--primary-color) !important;
+            margin: 0 1.2rem;
             position: relative;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.95rem;
         }
 
         .navbar-nav .nav-link:hover {
-            color: var(--primary-color) !important;
+            color: var(--secondary-color) !important;
+            transform: translateY(-2px);
         }
 
         .navbar-nav .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
-            bottom: -5px;
+            height: 3px;
+            bottom: -8px;
             left: 50%;
-            background: var(--gradient-primary);
+            background: var(--gradient-gold);
             transition: all 0.3s ease;
             transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: var(--shadow-gold);
         }
 
         .navbar-nav .nav-link:hover::after {
             width: 100%;
         }
 
-        /* Hero Section */
+        /* Hero Section - Modern Professional Sports Design */
         .hero-section {
             position: relative;
-            height: 75vh;
-            overflow: hidden;
+            height: 100vh;
+            min-height: 700px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0E1C36 0%, #1a2d4a 50%, #0E1C36 100%);
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(230, 57, 70, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+            z-index: 1;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+            z-index: 1;
         }
 
         .hero-slider {
@@ -120,7 +261,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 2;
         }
 
         .hero-slide {
@@ -132,10 +273,26 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
-            filter: brightness(1.0) contrast(1.08) saturate(1.05);
+            filter: brightness(0.7) contrast(1.1) saturate(1.2);
+        }
+        
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(14, 28, 54, 0.8) 0%,
+                rgba(14, 28, 54, 0.4) 30%,
+                rgba(230, 57, 70, 0.2) 70%,
+                rgba(14, 28, 54, 0.6) 100%
+            );
+            z-index: 1;
         }
 
         .hero-slide.active {
@@ -148,47 +305,128 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--gradient-hero);
-            z-index: 2;
+            background: linear-gradient(
+                135deg,
+                rgba(14, 28, 54, 0.85) 0%,
+                rgba(14, 28, 54, 0.3) 40%,
+                rgba(230, 57, 70, 0.15) 60%,
+                rgba(14, 28, 54, 0.7) 100%
+            );
+            z-index: 3;
         }
 
         .hero-content {
             position: relative;
-            z-index: 3;
+            z-index: 4;
             text-align: center;
-            color: white;
-            max-width: 800px;
+            color: var(--text-secondary);
+            max-width: 1000px;
             padding: 0 2rem;
+            animation: heroFadeIn 1.5s ease-out;
+        }
+        
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-shadow: 
+                0 0 40px rgba(230, 57, 70, 0.6),
+                3px 3px 12px rgba(0, 0, 0, 0.9),
+                -1px -1px 0 rgba(0, 0, 0, 0.8),
+                1px -1px 0 rgba(0, 0, 0, 0.8),
+                -1px 1px 0 rgba(0, 0, 0, 0.8),
+                1px 1px 0 rgba(0, 0, 0, 0.8);
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+        
+        .hero-title .accent {
+            color: var(--secondary-color);
+            text-shadow: 
+                0 0 40px rgba(230, 57, 70, 0.8),
+                3px 3px 12px rgba(0, 0, 0, 0.9),
+                -1px -1px 0 rgba(0, 0, 0, 0.8),
+                1px -1px 0 rgba(0, 0, 0, 0.8),
+                -1px 1px 0 rgba(0, 0, 0, 0.8),
+                1px 1px 0 rgba(0, 0, 0, 0.8);
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 
+                2px 2px 8px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(0, 0, 0, 0.6),
+                -1px -1px 0 rgba(0, 0, 0, 0.5),
+                1px -1px 0 rgba(0, 0, 0, 0.5),
+                -1px 1px 0 rgba(0, 0, 0, 0.5),
+                1px 1px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .hero-cta .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-cta .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .hero-cta .btn:hover::before {
+            left: 100%;
         }
 
         .btn-hero {
-            background: var(--gradient-primary);
-            border: none;
-            padding: 1.2rem 3rem;
-            font-size: 1.2rem;
-            font-weight: 700;
+            background: var(--gradient-gold);
+            border: 3px solid var(--secondary-color);
+            padding: 1.4rem 3.5rem;
+            font-size: 1.3rem;
+            font-weight: 800;
             border-radius: 50px;
-            color: white;
+            color: var(--primary-color);
             text-decoration: none;
             display: inline-block;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: var(--shadow-neon);
+            box-shadow: var(--shadow-gold);
             position: relative;
             overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-hero::before {
@@ -198,8 +436,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
         }
 
         .btn-hero:hover::before {
@@ -207,12 +445,33 @@
         }
 
         .btn-hero:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 0 30px rgba(91, 156, 255, 0.6), 0 0 60px rgba(0, 200, 255, 0.4);
-            color: white;
+            transform: translateY(-6px) scale(1.08);
+            box-shadow: 0 0 40px rgba(230, 57, 70, 0.6), 0 0 80px rgba(230, 57, 70, 0.3);
+            color: var(--primary-color);
+            border-color: var(--secondary-color);
         }
 
-        /* Cards */
+        /* Cards - Sportova Premium */
+        .sportova-product-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sportova-product-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(230, 57, 70, 0.3),
+                0 0 30px rgba(230, 57, 70, 0.2);
+        }
+
         .card {
             border: none;
             border-radius: 20px;
@@ -221,6 +480,7 @@
             box-shadow: var(--shadow-card);
             height: 100%;
             position: relative;
+            background: #ffffff;
         }
 
         .card:hover {
@@ -235,7 +495,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--gradient-primary);
+            background: var(--gradient-gold);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -245,7 +505,7 @@
         }
 
         .card:hover {
-            box-shadow: 0 0 25px rgba(91, 156, 255, 0.3), 0 25px 50px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 30px rgba(230, 57, 70, 0.25), 0 25px 50px rgba(14, 28, 54, 0.15);
         }
 
         .card-img-top {
@@ -264,47 +524,63 @@
 
         .card-title {
             font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            line-height: 1.3;
         }
 
         .card-text {
             color: var(--text-light);
             font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .price {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--secondary-color);
             margin: 1rem 0;
+            text-shadow: 0 1px 2px rgba(230, 57, 70, 0.2);
+            letter-spacing: -0.01em;
         }
 
-        /* Buttons */
+        /* Buttons - Sportova Premium */
         .btn-primary {
             background: var(--gradient-primary);
-            border: none;
-            border-radius: 25px;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            padding: 0.8rem 2.2rem;
+            font-weight: 700;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(91, 156, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(14, 28, 54, 0.2);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px rgba(91, 156, 255, 0.5), 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px rgba(14, 28, 54, 0.3), 0 8px 30px rgba(14, 28, 54, 0.15);
+            background: var(--gradient-dark);
+            border-color: var(--secondary-color);
+            color: var(--text-secondary);
         }
 
         .btn-outline-primary {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            border-radius: 25px;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 30px;
+            padding: 0.8rem 2.2rem;
+            font-weight: 700;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            background: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
         }
 
         .btn-outline-primary::before {
@@ -314,7 +590,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-primary);
+            background: var(--gradient-gold);
             transition: left 0.3s ease;
             z-index: -1;
         }
@@ -324,10 +600,10 @@
         }
 
         .btn-outline-primary:hover {
-            color: white;
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px rgba(91, 156, 255, 0.4);
+            color: var(--primary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px rgba(230, 57, 70, 0.4);
         }
 
         /* Section Styling */
@@ -336,24 +612,121 @@
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 2.75rem;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
             position: relative;
+            color: var(--primary-color);
+            letter-spacing: -0.025em;
+            line-height: 1.1;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-            box-shadow: 0 0 10px rgba(91, 156, 255, 0.5);
+            width: 100px;
+            height: 5px;
+            background: var(--gradient-gold);
+            border-radius: 3px;
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* Categories Section - Dynamic Background */
+        .categories-section {
+            position: relative;
+            color: white;
+            min-height: 600px;
+        }
+        
+        .categories-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(230, 57, 70, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(230, 57, 70, 0.08) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+            z-index: 1;
+        }
+        
+        .categories-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Force readable dark text inside category cards */
+        .categories-section .card .card-body { background-color: #ffffff !important; color: var(--text-primary) !important; }
+        .categories-section .card .card-body h1,
+        .categories-section .card .card-body h2,
+        .categories-section .card .card-body h3,
+        .categories-section .card .card-body h4,
+        .categories-section .card .card-body h5,
+        .categories-section .card .card-body .card-title { color: var(--primary-color) !important; }
+        .categories-section .card .card-body p,
+        .categories-section .card .card-body .card-text { color: var(--text-light) !important; }
+
+        .categories-section .section-title {
+            color: inherit;
+        }
+        
+        .categories-section .section-title::after {
+            background: var(--gradient-secondary);
+            box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+        }
+
+        /* Featured Products Section - Dynamic Background */
+        .featured-products {
+            position: relative;
+            color: white;
+            min-height: 700px;
+        }
+
+        .featured-products::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+            z-index: 1;
+        }
+
+        .featured-products .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Force readable dark text inside product cards */
+        .featured-products .card .card-body { background-color: #ffffff !important; color: var(--text-primary) !important; }
+        .featured-products .card .card-body h1,
+        .featured-products .card .card-body h2,
+        .featured-products .card .card-body h3,
+        .featured-products .card .card-body h4,
+        .featured-products .card .card-body h5,
+        .featured-products .card .card-body .card-title { color: var(--primary-color) !important; }
+        .featured-products .card .card-body p,
+        .featured-products .card .card-body .card-text { color: var(--text-light) !important; }
+        .featured-products .card .card-body .price { color: var(--secondary-color) !important; }
+
+        .featured-products .section-title {
+            color: inherit;
+            text-shadow: none;
+        }
+
+        .featured-products .section-title::after {
+            background: var(--gradient-secondary);
+            box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
         }
 
         /* Footer */
@@ -367,34 +740,117 @@
         .footer h5 {
             color: var(--secondary-color);
             margin-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .footer a {
             color: #bdc3c7;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .footer a:hover {
             color: var(--secondary-color);
+            text-shadow: 0 0 8px rgba(230, 57, 70, 0.35);
+            transform: translateX(3px);
         }
 
-        /* Responsive */
+        /* Responsive - Sportova Premium */
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
             }
             
             .hero-subtitle {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
+                margin-bottom: 2rem;
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
+                margin-bottom: 2.5rem;
             }
             
             .navbar-brand {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
+            }
+            
+            .navbar-nav .nav-link {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .btn-hero {
+                padding: 1.2rem 2.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .hero-section {
+                height: 70vh;
+            }
+            
+            .card-title {
+                font-size: 1.1rem;
+            }
+            
+            .price {
+                font-size: 1.4rem;
+            }
+            
+            .icon-wrapper {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .icon-wrapper i {
+                font-size: 2rem;
+            }
+            
+            .feature-title {
+                font-size: 1.1rem;
+            }
+            
+            .feature-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn-hero {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.6rem;
+            }
+            
+            .hero-section {
+                height: 60vh;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .sportova-feature-box {
+                padding: 1.5rem 1rem;
             }
         }
 
@@ -477,6 +933,217 @@
         .whatsapp-float i {
             margin-top: 18px;
         }
+
+        /* Sportova Premium Card Enhancements */
+        .sportova-card {
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .sportova-card:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), 0 25px 50px rgba(14, 28, 54, 0.15);
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(14, 28, 54, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .sportova-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            text-align: center;
+            color: var(--text-secondary);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .sportova-card:hover .overlay-content {
+            transform: translateY(0);
+        }
+
+        /* Product Card Enhancements */
+        .sportova-product-card .product-overlay {
+            background: rgba(14, 28, 54, 0.9);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-action {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .btn-action:hover {
+            transform: scale(1.1);
+        }
+
+        /* Badges */
+        .sportova-featured-badge {
+            background: var(--gradient-gold) !important;
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .sportova-category-badge {
+            background: var(--primary-color) !important;
+            color: var(--text-secondary) !important;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+        }
+
+        /* Feature Boxes */
+        .sportova-feature-box {
+            padding: 2rem 1rem;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .sportova-feature-box:hover {
+            transform: translateY(-10px);
+            background: #ffffff;
+            box-shadow: var(--shadow-card);
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-gold);
+            transition: all 0.3s ease;
+        }
+
+        .sportova-feature-box:hover .icon-wrapper {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(230, 57, 70, 0.5);
+        }
+
+        .feature-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-text {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            padding: 3rem 2rem;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: var(--shadow-card);
+        }
+    </style>
+    
+    <!-- Dynamic Background Styles -->
+    <style>
+        {% if backgrounds.bg_categories %}
+        .categories-section {
+            {{ backgrounds.bg_categories.get_css_background|safe }}
+            color: var(--text-secondary) !important;
+        }
+        .categories-section .section-title,
+        .categories-section p,
+        .categories-section .text-muted,
+        .categories-section .card-title,
+        .categories-section .card-text {
+            color: var(--text-secondary) !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+        }
+        {% else %}
+        .categories-section {
+            background: #ffffff !important;
+            color: var(--text-primary) !important;
+        }
+        .categories-section .section-title,
+        .categories-section p,
+        .categories-section .text-muted,
+        .categories-section .card-title,
+        .categories-section .card-text {
+            color: var(--text-primary) !important;
+            text-shadow: none !important;
+        }
+        {% endif %}
+        
+        {% if backgrounds.bg_featured %}
+        .featured-products {
+            {{ backgrounds.bg_featured.get_css_background|safe }}
+            color: var(--text-secondary) !important;
+        }
+        .featured-products .section-title,
+        .featured-products p,
+        .featured-products .text-muted,
+        .featured-products .card-title,
+        .featured-products .card-text {
+            color: var(--text-secondary) !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+        }
+        {% else %}
+        .featured-products {
+            background: #ffffff !important;
+            color: var(--text-primary) !important;
+        }
+        .featured-products .section-title,
+        .featured-products p,
+        .featured-products .text-muted,
+        .featured-products .card-title,
+        .featured-products .card-text {
+            color: var(--text-primary) !important;
+            text-shadow: none !important;
+        }
+        {% endif %}
+        
+        {% if backgrounds.bg_hero %}
+        .hero-section {
+            {{ backgrounds.bg_hero.get_css_background|safe }}
+        }
+        {% endif %}
     </style>
 </head>
 <body>

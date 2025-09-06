@@ -66,40 +66,45 @@
             <!-- Product Details -->
             <div class="col-lg-6">
                 <div class="product-details-content">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="badge text-bg-primary fs-6">{{ product.category.name }}</span>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge sportova-category-badge fs-6">{{ product.category.name }}</span>
                         {% if product.is_featured %}
-                        <span class="badge text-bg-warning">
+                        <span class="badge sportova-featured-badge">
                             <i class="fas fa-star me-1"></i>Featured
                         </span>
                         {% endif %}
                     </div>
                     
-                    <h1 class="h2 fw-bold mb-3">{{ product.name }}</h1>
+                    <h1 class="h2 fw-bold mb-4" style="color: var(--primary-color);">{{ product.name }}</h1>
                     
                     <div class="price-section mb-4">
-                        <span class="h1 fw-bolder text-primary">${{ product.price }}</span>
+                        <span class="h1 fw-bolder" style="color: var(--secondary-color); text-shadow: 0 2px 4px rgba(255, 215, 0, 0.2);">${{ product.price }}</span>
+                        <div class="mt-2">
+                            <span class="badge bg-light text-dark fs-6 px-3 py-2">
+                                <i class="fas fa-ruler-combined me-2"></i>Size: {{ product.size|default:'N/A' }}
+                            </span>
+                        </div>
                     </div>
                     
                     <div class="description mb-4">
-                        <h5 class="fw-semibold mb-2">Description</h5>
-                        <p class="text-muted">{{ product.description|linebreaks }}</p>
+                        <h5 class="fw-semibold mb-3" style="color: var(--primary-color);">Description</h5>
+                        <p style="color: var(--text-light); line-height: 1.7;">{{ product.description|linebreaks }}</p>
                     </div>
 
                     <!-- Contact Buttons -->
-                    <div class="card shadow-sm mb-4">
+                    <div class="card sportova-contact-card shadow-sm mb-4">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-3">Interested in this product?</h5>
-                            <p class="card-text text-muted small mb-3">Contact us directly for more information or to place an order.</p>
-                            <div class="d-flex gap-2">
+                            <h5 class="card-title fw-bold mb-3" style="color: var(--primary-color);">Interested in this product?</h5>
+                            <p class="card-text mb-4" style="color: var(--text-light);">Contact us directly for more information or to place an order.</p>
+                            <div class="d-flex gap-3">
                                 <a href="{{ product.get_whatsapp_url }}" 
-                                   class="btn btn-success btn-sm contact-btn rounded-pill d-flex align-items-center"
+                                   class="btn btn-success contact-btn rounded-pill d-flex align-items-center flex-fill justify-content-center"
                                    target="_blank">
                                     <i class="fab fa-whatsapp me-2"></i>
                                     <span>WhatsApp</span>
                                 </a>
                                 <a href="mailto:{{ product.get_email_recipient }}?subject={{ product.get_email_subject }}&body={{ product.get_email_body|urlencode }}" 
-                                   class="btn btn-primary btn-sm contact-btn rounded-pill d-flex align-items-center">
+                                   class="btn btn-primary contact-btn rounded-pill d-flex align-items-center flex-fill justify-content-center">
                                     <i class="fas fa-envelope me-2"></i>
                                     <span>Email</span>
                                 </a>
@@ -109,23 +114,23 @@
 
                     <!-- Product Features -->
                     <div class="features-section">
-                        <h5 class="fw-semibold mb-3">Why Choose This Product?</h5>
+                        <h5 class="fw-bold mb-4" style="color: var(--primary-color);">Why Choose This Product?</h5>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex align-items-center border-0 px-0">
-                                <i class="fas fa-check-circle text-success me-2"></i>
-                                Premium quality materials
+                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2">
+                                <i class="fas fa-check-circle me-3" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <span style="color: var(--text-light); font-weight: 500;">Premium quality materials</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center border-0 px-0">
-                                <i class="fas fa-check-circle text-success me-2"></i>
-                                Professional grade equipment
+                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2">
+                                <i class="fas fa-check-circle me-3" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <span style="color: var(--text-light); font-weight: 500;">Professional grade equipment</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center border-0 px-0">
-                                <i class="fas fa-check-circle text-success me-2"></i>
-                                Fast and secure delivery
+                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2">
+                                <i class="fas fa-check-circle me-3" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <span style="color: var(--text-light); font-weight: 500;">Fast and secure delivery</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center border-0 px-0">
-                                <i class="fas fa-check-circle text-success me-2"></i>
-                                Expert customer support
+                            <li class="list-group-item d-flex align-items-center border-0 px-0 py-2">
+                                <i class="fas fa-check-circle me-3" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <span style="color: var(--text-light); font-weight: 500;">Expert customer support</span>
                             </li>
                         </ul>
                     </div>
@@ -197,12 +202,9 @@
 
 {% block extra_js %}
 <style>
-:root {
-    --primary-color: #0d6efd;
-}
-
 .product-detail-section {
-    padding: 60px 0;
+    padding: 80px 0;
+    background: var(--background-color);
 }
 
 .main-product-image {
@@ -216,6 +218,17 @@
     transform: scale(1.02);
 }
 
+/* Zoom-on-hover (mouse-tracked) */
+.main-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.main-image-wrapper.zoom-active .main-product-image {
+    transform: scale(2.2);
+    cursor: zoom-out;
+}
+
 .thumbnail-image {
     height: 80px;
     width: 100%;
@@ -224,17 +237,18 @@
     border: 2px solid transparent;
     transition: all 0.3s ease;
     opacity: 0.7;
+    border-radius: 10px;
 }
 
 .thumbnail-image:hover {
     opacity: 1;
-    border-color: var(--primary-color);
+    border-color: var(--secondary-color);
 }
 
 .thumbnail-image.active {
     opacity: 1;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 10px rgba(13, 110, 253, 0.35);
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-gold);
 }
 
 .product-card .card-img-top {
@@ -247,42 +261,58 @@
     transform: scale(1.05);
 }
 
+/* Sportova Contact Card */
+.sportova-contact-card {
+    border: 2px solid var(--secondary-color);
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border-radius: 20px;
+}
+
 /* Unified contact buttons */
 .contact-btn {
-    border-radius: 9999px !important; /* pill shape */
-    padding: 0.35rem 0.75rem !important; /* equal height/width spacing */
-    line-height: 1.15 !important;
-    font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
-    background-size: 200% auto; /* for animated gradient */
+    border-radius: 30px !important;
+    padding: 0.8rem 1.5rem !important;
+    line-height: 1.2 !important;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
 }
-.contact-btn i { font-size: 0.95rem; }
+.contact-btn i { font-size: 1.1rem; }
 
 /* Animated gradients and hover effects */
 .contact-btn.btn-primary {
-    color: #fff;
-    border: none;
-    background-image: linear-gradient(90deg, #0d6efd 0%, #3aa0ff 50%, #0d6efd 100%);
+    color: var(--text-secondary);
+    border: 2px solid var(--primary-color);
+    background: var(--gradient-primary);
 }
 .contact-btn.btn-success {
     color: #fff;
-    border: none;
-    background-image: linear-gradient(90deg, #198754 0%, #27b36a 50%, #198754 100%);
+    border: 2px solid #25d366;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
 }
 .contact-btn:hover {
-    transform: translateY(-1px) scale(1.03);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    background-position: right center; /* animate gradient */
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.contact-btn.btn-primary:hover {
+    background: var(--gradient-dark);
+    border-color: var(--secondary-color);
+    color: var(--text-secondary);
+}
+.contact-btn.btn-success:hover {
+    background: linear-gradient(135deg, #128c7e 0%, #25d366 100%);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
 }
 .contact-btn:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transform: translateY(-1px) scale(1.02);
 }
 .contact-btn i {
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease;
 }
 .contact-btn:hover i {
-    transform: translateX(2px);
+    transform: translateX(3px);
 }
 </style>
 
@@ -291,6 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainImage = document.getElementById('mainImage');
     const thumbs = Array.from(document.querySelectorAll('.thumbnail-image'));
     const lightboxImage = document.getElementById('lightboxImage');
+    const mainWrapper = mainImage ? mainImage.closest('.main-image-wrapper') : null;
 
     if (!mainImage) return;
 
@@ -325,6 +356,32 @@ document.addEventListener('DOMContentLoaded', function() {
         productLightbox.addEventListener('show.bs.modal', function () {
             lightboxImage.src = mainImage.src;
         });
+    }
+
+    // Zoom-on-hover with mouse tracking
+    if (mainWrapper && mainImage) {
+        const onMove = (e) => {
+            const rect = mainWrapper.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            mainImage.style.transformOrigin = `${x}% ${y}%`;
+        };
+
+        mainWrapper.addEventListener('mouseenter', () => {
+            mainWrapper.classList.add('zoom-active');
+        });
+        mainWrapper.addEventListener('mousemove', onMove);
+        mainWrapper.addEventListener('mouseleave', () => {
+            mainWrapper.classList.remove('zoom-active');
+            mainImage.style.transformOrigin = 'center center';
+        });
+        // Also disable zoom when opening lightbox
+        if (productLightbox) {
+            productLightbox.addEventListener('show.bs.modal', () => {
+                mainWrapper.classList.remove('zoom-active');
+                mainImage.style.transformOrigin = 'center center';
+            });
+        }
     }
 });
 </script>
