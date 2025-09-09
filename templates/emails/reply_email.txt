@@ -1,0 +1,30 @@
+Dear {{ reply.contact_message.name }},
+
+Thank you for contacting Sportova! We have reviewed your message and are pleased to provide you with a response.
+
+Your Original Message:
+Subject: {{ reply.contact_message.subject }}
+Date: {{ reply.contact_message.created_at|date:"F d, Y \a\t g:i A" }}
+Message: {{ reply.contact_message.message }}
+
+---
+
+Our Response:
+{{ reply.reply_message }}
+
+---
+
+Need Further Assistance?
+If you have any additional questions or need more information, don't hesitate to reach out to us!
+
+Email: {{ contact_email }}
+WhatsApp: {{ whatsapp_number }}
+
+Best regards,
+{{ reply.sent_by }}
+Sportova Team
+
+---
+This email was sent in response to your inquiry on the Sportova website.
+Reply ID: #{{ reply.id }} | Original Message ID: #{{ reply.contact_message.id }}
+© {{ current_year }} Sportova - Premium Sports Equipment
