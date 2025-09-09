@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -133,5 +134,18 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Site Contact
-WHATSAPP_NUMBER = "+923480867200"
-CONTACT_EMAIL = "yourmail@example.com"
+WHATSAPP_NUMBER = config('WHATSAPP_NUMBER')
+CONTACT_EMAIL = config('CONTACT_EMAIL')
+
+# Email Configuration
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
+
+# Email settings for contact form
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+SPORTOVA_OWNER_EMAIL = config('SPORTOVA_OWNER_EMAIL')
