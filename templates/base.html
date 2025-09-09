@@ -1169,6 +1169,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'sportova:shipment' %}">Shipping</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sportova:contact' %}">Contact</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -1176,6 +1179,15 @@
 
     <!-- Main Content -->
     <main style="margin-top: 80px;">
+        {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} shadow-sm" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}
         {% endblock %}
     </main>
@@ -1194,6 +1206,7 @@
                         <li><a href="{% url 'sportova:home' %}">Home</a></li>
                         <li><a href="{% url 'sportova:product_list' %}">Products</a></li>
                         <li><a href="{% url 'sportova:shipment' %}">Shipping Info</a></li>
+                        <li><a href="{% url 'sportova:contact' %}">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
