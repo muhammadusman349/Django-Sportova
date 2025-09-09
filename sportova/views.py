@@ -1,5 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from .models import Category, Product, Shipment, BannerPicture
+from .forms import ContactForm
+from .tasks import send_contact_notification_email, send_contact_confirmation_email
 
 
 def home(request):
@@ -69,3 +72,26 @@ def shipment(request):
         'shipment': shipment,
     }
     return render(request, 'sportova/shipment.html', context)
+
+
+def contact(request):
+    """Contact page to submit inquiries"""
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Save the contact message
+            contact_message = form.save()
+
+            # Send email notifications using tasks
+            notification_sent = send_contact_notification_email(contact_message)
+            confirmation_sent = send_contact_confirmation_email(contact_message)
+
+            # Show success message to user
+            messages.success(request, 'Thanks for contacting Sportova! We will get back to you shortly.')
+            return redirect('sportova:contact')
+        else:
+            messages.error(request, 'Please correct the errors below and resubmit.')
+    else:
+        form = ContactForm()
+
+    return render(request, 'sportova/contact.html', {'form': form})

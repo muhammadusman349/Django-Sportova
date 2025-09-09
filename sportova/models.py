@@ -136,7 +136,7 @@ class BackgroundImage(models.Model):
         ('about', 'About Section'),
         ('contact', 'Contact Section'),
     ]
-    
+
     name = models.CharField(max_length=100)
     section = models.CharField(max_length=20, choices=SECTION_CHOICES, unique=True)
     image = models.ImageField(upload_to='backgrounds/')
@@ -170,6 +170,82 @@ class BackgroundImage(models.Model):
         """Convert hex color to RGB values"""
         hex_color = hex_color.lstrip('#')
         return ', '.join(str(int(hex_color[i:i+2], 16)) for i in (0, 2, 4))
+
+
+class ContactMessage(models.Model):
+    STATUS_CHOICES = [
+        ('new', 'New'),
+        ('in_progress', 'In Progress'),
+        ('closed', 'Closed'),
+    ]
+
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+    phone = models.CharField(max_length=30, blank=True)
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new')
+    owner_notes = models.TextField(blank=True)
+    replied_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Contact Message'
+        verbose_name_plural = 'Contact Messages'
+
+    def __str__(self):
+        return f"{self.subject} - {self.name}"
+
+    @property
+    def has_reply(self):
+        return self.replies.exists()
+
+    @property
+    def reply_count(self):
+        return self.replies.count()
+
+
+class ContactReply(models.Model):
+    contact_message = models.ForeignKey(ContactMessage, on_delete=models.CASCADE, related_name='replies')
+    reply_subject = models.CharField(max_length=200)
+    reply_message = models.TextField()
+    sent_by = models.CharField(max_length=100, default='Sportova Team')
+    sent_at = models.DateTimeField(auto_now_add=True)
+    email_sent = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-sent_at']
+        verbose_name = 'Contact Reply'
+        verbose_name_plural = 'Contact Replies'
+
+    def __str__(self):
+        return f"Reply to: {self.contact_message.subject}"
+
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        super().save(*args, **kwargs)
+
+        # Send email automatically when reply is created
+        if is_new and not self.email_sent:
+            from django.utils import timezone
+            from .tasks import send_reply_email
+            try:
+                print(f"Success: New reply created, sending email to {self.contact_message.email}")
+                success = send_reply_email(self)
+                if success:
+                    # Update fields without triggering save again
+                    ContactReply.objects.filter(pk=self.pk).update(email_sent=True)
+                    ContactMessage.objects.filter(pk=self.contact_message.pk).update(
+                        replied_at=timezone.now(),
+                        status='in_progress'
+                    )
+                    print(f"Success: Email sent successfully and status updated")
+                else:
+                    print(f"ERROR: Email sending failed")
+            except Exception as e:
+                print(f"ERROR: Error sending email: {str(e)}")
 
 
 class BannerPicture(models.Model):

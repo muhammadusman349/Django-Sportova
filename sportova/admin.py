@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Category, Product, ProductImage, Shipment, BannerPicture, BackgroundImage
+from .models import (
+    Category, Product, ProductImage,
+    Shipment, BannerPicture, BackgroundImage,
+    ContactMessage, ContactReply
+)
 
 
 @admin.register(Category)
@@ -93,6 +97,61 @@ class BackgroundImageAdmin(admin.ModelAdmin):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields['overlay_color'].widget.attrs['type'] = 'color'
         return form
+
+
+class ContactReplyInline(admin.TabularInline):
+    model = ContactReply
+    extra = 1
+    fields = ['reply_subject', 'reply_message', 'sent_by']
+    readonly_fields = []
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'subject', 'name', 'email', 'status', 'reply_count', 'created_at']
+    list_filter = ['status', 'created_at']
+    search_fields = ['name', 'email', 'subject', 'message']
+    readonly_fields = ['created_at', 'updated_at', 'replied_at', 'reply_count']
+    inlines = [ContactReplyInline]
+    fieldsets = (
+        ('Sender', {
+            'fields': ('name', 'email', 'phone')
+        }),
+        ('Message', {
+            'fields': ('subject', 'message')
+        }),
+        ('Owner', {
+            'fields': ('status', 'owner_notes')
+        }),
+        ('Reply Info', {
+            'fields': ('replied_at', 'reply_count'),
+            'classes': ('collapse',)
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        })
+    )
+
+    actions = ['mark_in_progress', 'mark_closed']
+
+    def mark_in_progress(self, request, queryset):
+        updated = queryset.update(status='in_progress')
+        self.message_user(request, f"Marked {updated} message(s) as In Progress")
+    mark_in_progress.short_description = 'Mark selected as In Progress'
+
+    def mark_closed(self, request, queryset):
+        updated = queryset.update(status='closed')
+        self.message_user(request, f"Marked {updated} message(s) as Closed")
+    mark_closed.short_description = 'Mark selected as Closed'
+
+
+@admin.register(ContactReply)
+class ContactReplyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'contact_message', 'reply_subject', 'sent_by', 'email_sent', 'sent_at']
+    list_filter = ['email_sent', 'sent_at', 'sent_by']
+    search_fields = ['reply_subject', 'reply_message', 'contact_message__subject']
+    readonly_fields = ['sent_at', 'email_sent']
 
 
 @admin.register(BannerPicture)
