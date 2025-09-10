@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .models import Category, Product, Shipment, BannerPicture
 from .forms import ContactForm
 from .tasks import send_contact_notification_email, send_contact_confirmation_email
@@ -7,7 +8,7 @@ from .tasks import send_contact_notification_email, send_contact_confirmation_em
 
 def home(request):
     """Homepage with featured products and categories"""
-    categories = Category.objects.all()[:3]  # Main categories
+    categories = Category.objects.all()[:6]  # Show 6 categories
     featured_products = Product.objects.filter(is_featured=True)[:6]
     banner_pictures = BannerPicture.objects.all()[:5]
     # banner_products = Product.objects.filter(image__in=banner_pictures.values('image'))
@@ -24,14 +25,19 @@ def home(request):
 
 def product_list(request):
     """View to display all products"""
-    products = Product.objects.all().order_by('-created_at')
+    product_list = Product.objects.all().order_by('-created_at')
     categories = Category.objects.all()
 
     # Get category filter from query parameters
     category_slug = request.GET.get('category')
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
-        products = products.filter(category=category)
+        product_list = product_list.filter(category=category)
+
+    # Pagination
+    paginator = Paginator(product_list, 9)  # Show 9 products per page
+    page_number = request.GET.get('page')
+    products = paginator.get_page(page_number)
 
     context = {
         'products': products,
@@ -63,6 +69,21 @@ def category_detail(request, slug):
         'products': products,
     }
     return render(request, 'sportova/category_detail.html', context)
+
+
+def category_list(request):
+    """Category list page showing all categories"""
+    category_list = Category.objects.all().order_by('name')
+
+    # Pagination
+    paginator = Paginator(category_list, 6)  # Show 6 categories per page
+    page_number = request.GET.get('page')
+    categories = paginator.get_page(page_number)
+
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'sportova/category_list.html', context)
 
 
 def shipment(request):
