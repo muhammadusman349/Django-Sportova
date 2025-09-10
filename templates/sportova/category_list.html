@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}All Categories - Sportova{% endblock %}
+
+{% block content %}
+<!-- Category List Header -->
+<section class="py-5" style="background: var(--background-color);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'sportova:home' %}" style="color: var(--text-light); text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item active" style="color: var(--secondary-color); font-weight: 600;">Categories</li>
+                    </ol>
+                </nav>
+                <h1 class="display-4 fw-bold" style="color: var(--primary-color);">All Categories</h1>
+                <p class="lead" style="color: var(--text-light);">Explore our complete range of premium sports equipment categories</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <div class="category-stats">
+                    <span class="badge sportova-category-badge fs-5">{{ categories.count }} Categories</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Grid -->
+<section class="section categories-section">
+    <div class="container">
+        <div class="row g-4">
+            {% for category in categories %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card sportova-card h-100">
+                    <div class="card-image-wrapper">
+                        {% if category.image %}
+                        <img src="{{ category.image.url }}" class="card-img-top" alt="{{ category.name }}" style="height: 280px; object-fit: cover;">
+                        {% else %}
+                        <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 280px; background: var(--gradient-primary);">
+                            <div class="text-center">
+                                <i class="fas fa-futbol fa-5x mb-2" style="color: var(--secondary-color);"></i>
+                                <p class="mb-0" style="color: var(--text-secondary);">{{ category.name }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="card-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-eye fa-2x mb-2"></i>
+                                <p class="mb-0">Explore Collection</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        <p class="card-text flex-grow-1">Premium {{ category.name|lower }} for champions and professionals</p>
+                        <div class="category-info mb-3">
+                            <span class="badge bg-light text-dark">{{ category.products.count }} Product{{ category.products.count|pluralize }}</span>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="{{ category.get_absolute_url }}" class="btn btn-primary w-100">
+                                <i class="fas fa-arrow-right me-2"></i>View Products
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="empty-state text-center py-5">
+                    <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+                    <h3 style="color: var(--primary-color);">No categories available</h3>
+                    <p style="color: var(--text-light);">Categories will be added soon!</p>
+                    <a href="{% url 'sportova:home' %}" class="btn btn-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if categories.has_other_pages %}
+        <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if categories.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ categories.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
+                    </li>
+                {% endif %}
+
+                {% for i in categories.paginator.page_range %}
+                    {% if categories.number == i %}
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ i }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if categories.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ categories.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section" style="background: var(--background-color);">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="mb-4" style="color: var(--primary-color);">Need Help Choosing?</h2>
+                <p class="lead mb-4" style="color: var(--text-light);">Our sports equipment experts are here to help you find the perfect gear for your sport and skill level.</p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'sportova:product_list' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-th-large me-2"></i>Browse All Products
+                    </a>
+                    <a href="https://wa.me/{{ WHATSAPP_NUMBER|cut:'+' }}?text=Hi, I need help choosing sports equipment" 
+                       class="btn btn-success btn-lg contact-btn" target="_blank">
+                        <i class="fab fa-whatsapp me-2"></i>Get Expert Advice
+                    </a>
+                    <a href="{% url 'sportova:contact' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Categories Highlight -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-10">
+                <h2 class="mb-4">Why Choose Sportova Categories?</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="feature-box">
+                            <div class="feature-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <h5>Premium Quality</h5>
+                            <p>Professional-grade equipment across all categories for serious athletes</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-box">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h5>Expert Curation</h5>
+                            <p>Each category carefully selected by sports professionals and enthusiasts</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-box">
+                            <div class="feature-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <h5>Fast Delivery</h5>
+                            <p>Quick shipping across all categories to get you equipped faster</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add stagger animation to category cards
+    const cards = document.querySelectorAll('.category-card');
+    
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.6s ease';
+        
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+
+    // Add hover effects to feature boxes
+    const featureBoxes = document.querySelectorAll('.feature-box');
+    featureBoxes.forEach(box => {
+        box.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        box.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
+</script>
+{% endblock %}
